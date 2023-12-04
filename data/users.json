@@ -1,0 +1,14 @@
+{
+  "users": [
+    {
+      "name": "ahmed",
+      "password": "2005",
+      "id": 1
+    }
+  ],
+  "current": {
+    "name": "ahmed",
+    "valid": true,
+    "id": "1"
+  }
+}

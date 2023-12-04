@@ -18,6 +18,7 @@
             background-color: $prime-grey;
             img{
              width: 80px;
+            
             }
         }
     }
@@ -26,5 +27,26 @@
         color: $prime-grey;
         border: none;
     }
+    .error{
+        input{
+            border: 1px solid #f00;
+        }
+    }
 }
 
+.success-sign{
+    display: inline-block;
+    display: flex;
+    justify-content: center;
+    width: 500px;
+    margin: auto;
+    background-color: #18c45d !important;
+    color: #fff;
+    opacity: 1;
+    background: none;
+    z-index: 99999999999;
+    position: relative;
+    font-size: 20px;
+    border-radius: 8px;
+    font-style: italic;
+}
