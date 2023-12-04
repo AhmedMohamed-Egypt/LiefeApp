@@ -1,0 +1,9 @@
+input,button{
+    &:focus,&:hover,&:active{
+        outline: 0 !important;
+        box-shadow: none !important;
+        background: inherit !important;
+        color: inherit !important;
+        
+    }
+}

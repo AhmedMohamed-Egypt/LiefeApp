@@ -1,0 +1,30 @@
+.login{
+   
+    &::after{
+        @include aftr();
+        background-image: url('../imgs/p-1.png');
+        background-size: cover;
+        background-position: center;
+        background-color:rgba( $sec-grey,.5);
+
+    }
+    &__card{
+        @include cntr();
+        width: 500px;
+       
+        z-index: 999;
+        background-color: $white;
+        &--header{
+            background-color: $prime-grey;
+            img{
+             width: 80px;
+            }
+        }
+    }
+    .singup{
+        background: none;
+        color: $prime-grey;
+        border: none;
+    }
+}
+

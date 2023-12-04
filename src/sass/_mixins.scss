@@ -1,0 +1,54 @@
+//font-size
+$px:'px';
+@for $i from 1 through 50 {
+    .size-#{$i}{
+        font-size: #{$i}+$px !important;
+    }
+}
+@for $i from 1 through 50 {
+    .mt-#{$i}{
+        margin-top: #{$i}+$px !important;
+    }
+    .mb-#{$i}{
+        margin-bottom: #{$i}+$px !important;
+    }
+    .mr-#{$i}{
+        margin-right: #{$i}+$px !important;
+    }
+    .ml-#{$i}{
+        margin-left: #{$i}+$px !important;
+    }
+    .pt-#{$i}{
+        padding-top: #{$i}+$px !important;
+    }
+    .pb-#{$i}{
+        padding-bottom: #{$i}+$px !important;
+    }
+    .pr-#{$i}{
+        padding-right: #{$i}+$px !important;
+    }
+    .pl-#{$i}{
+        padding-left: #{$i}+$px !important;
+    }
+    .boradius-#{$i}{
+        border-radius:#{$i}+$px !important; ;
+    }
+}
+
+//Center Element 
+
+@mixin cntr{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+@mixin aftr{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+}
