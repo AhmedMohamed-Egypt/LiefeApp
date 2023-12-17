@@ -3,13 +3,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 
 import Register from "./pages/Register";
-import { ProviderRegister } from "./Context/RegisterContext";
+
 import Home from "./pages/Home";
+import { RegisterProvider } from "./Context/RegisterContext";
 
 function App() {
   return (
-    <ProviderRegister>
-    <BrowserRouter>
+   <RegisterProvider>
+   <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/signup" element={<Register />} />
@@ -17,7 +18,9 @@ function App() {
         
       </Routes>
     </BrowserRouter>
-    </ProviderRegister>
+   </RegisterProvider>
+ 
+  
 
   );
 }
