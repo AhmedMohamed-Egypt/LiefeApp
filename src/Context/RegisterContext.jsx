@@ -98,8 +98,9 @@ function reducer(snState, action) {
           return false;
         }
       });
+      const successLogin = filterUsers[0]?.username&&true
 
-      return { ...snState, login: ((filterUsers[0]?.username&&true) || false) };
+      return { ...snState, login: ((filterUsers[0]?.username&&true) || false), loginInfo:successLogin?{username:'',password:''}:snState.loginInfo};
     }
 
     default: {

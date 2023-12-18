@@ -1,6 +1,7 @@
+import { Link } from "react-router-dom";
 import { UseRegister } from "../Context/RegisterContext";
 import Alert from "../components/Alert";
-import DirectUser from "../components/DirectUser";
+
 import ErrorForm from "../components/ErrorForm";
 import Button from "../components/UI/Button";
 
@@ -15,12 +16,12 @@ function Register() {
     <div className="login">
       <form action="">
         <div className={`login__card pb-50 boradius-8`}>
-          <div className="login__card--header pt-15 pb-15 mb-15">
-            <img className="d-block mx-auto" src="./imgs/logo-sm.png" alt="" />
+          <div className="login__card--header pt-20 pb-80 mb-25">
+            <img className=" mx-auto" src="./imgs/logo-sm.png" alt="" />
             <p className="text-white text-center">Let&apos;s Get Started App</p>
           </div>
           <div className="pr-25 pl-25">
-            <div className={`  ${(user && "error") || ""}`}>
+            <div className={`  ${(user && "error") || ""} pb-10`}>
               <label htmlFor="" className="d-block mb-10">
                 User name
               </label>
@@ -33,9 +34,10 @@ function Register() {
                 value={userInfo.username}
                 onChange={(e) => getUserName(e.target.value)}
               />
-              {<ErrorForm message={user && errorMessage.userMsg} />}
+             
+              {user&&<ErrorForm message={errorMessage.userMsg}/>}
             </div>
-            <div className={` ${(password && "error") || ""}`}>
+            <div className={` ${(password && "error") || ""} pb-10`}>
               <label htmlFor="" className="d-block mb-10">
                 Password
               </label>
@@ -48,7 +50,8 @@ function Register() {
                 value={userInfo.password}
                 onChange={(e) => getPassWord(e.target.value)}
               />
-              {<ErrorForm message={password&&errorMessage.passMsg}/>}
+             
+              {password&&<ErrorForm message={errorMessage.passMsg}/>}
             </div>
           </div>
           <Button
@@ -58,11 +61,13 @@ function Register() {
           >
             Sign Up
           </Button>
-          <DirectUser
-            message={"Already  have an account "}
-            action={"Sing In"}
-            page="/"
-          />
+          
+            <div className="d-flex justify-content-center align-items-center mt-25">
+            <p className="mb-0">Already  have an account</p>
+            <Link to="/" className={'singup fw-bold ml-10'} >Sign In</Link>
+            
+        </div>
+
         </div>
         {posted&&<Alert message='Sign Up Successfully'/>}
         

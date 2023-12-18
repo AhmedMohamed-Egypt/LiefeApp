@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 
 
@@ -7,7 +7,7 @@ function DirectUser({message,action,page}) {
     return (
         <div className="d-flex justify-content-center align-items-center mt-25">
             <p className="mb-0">{message}</p>
-            <NavLink className={'singup fw-bold ml-10'} to={page}>{action}</NavLink>
+            <Link to={page} className={'singup fw-bold ml-10'} >{action}</Link>
             
         </div>
     )

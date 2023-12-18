@@ -15,10 +15,15 @@
         z-index: 999;
         background-color: $white;
         overflow: hidden;
+       height: 525px;
         &--header{
             background-color: $prime-grey;
             img{
              width: 80px;
+             position: absolute;
+             left: 0;
+             right: 0;
+             top: 50px;
             
             }
         }

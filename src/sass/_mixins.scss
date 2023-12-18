@@ -5,7 +5,7 @@ $px:'px';
         font-size: #{$i}+$px !important;
     }
 }
-@for $i from 1 through 50 {
+@for $i from 1 through 100 {
     .mt-#{$i}{
         margin-top: #{$i}+$px !important;
     }

@@ -9,16 +9,18 @@ import { RegisterProvider } from "./Context/RegisterContext";
 
 function App() {
   return (
+    <BrowserRouter>
    <RegisterProvider>
-   <BrowserRouter>
+   
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route index path="/" element={<Login />} />
         <Route path="/signup" element={<Register />} />
         <Route path = "/Home" element ={<Home/>}/>
         
       </Routes>
-    </BrowserRouter>
+   
    </RegisterProvider>
+   </BrowserRouter>
  
   
 
