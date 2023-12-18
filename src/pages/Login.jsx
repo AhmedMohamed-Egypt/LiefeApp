@@ -13,6 +13,8 @@ import { Link } from "react-router-dom";
 function Login() {
 
 const {  getuserLogin,getPassLogin,loginInfo,verifyUser,login} = UseRegister()
+const noUser = (loginInfo.username.length !==0) && (loginInfo.password.length!==0) && (login===false)
+console.log(noUser)
 
   return (
     <div className="login">
@@ -69,6 +71,7 @@ const {  getuserLogin,getPassLogin,loginInfo,verifyUser,login} = UseRegister()
       
     </form>
     {login&&<Alert message={"Successfully Login"}/>}
+    {noUser && <Alert message={"Not Found"} className={'alert-danger'}/>}
     </div>
   );
 }
