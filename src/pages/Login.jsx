@@ -2,6 +2,7 @@ import DirectUser from "../components/DirectUser";
 import Button from "../components/UI/Button";
 import img from '../assets/logo-sm.png'
 import { UseRegister } from "../Context/RegisterContext";
+import Alert from "../components/Alert";
 
 
 
@@ -10,7 +11,7 @@ import { UseRegister } from "../Context/RegisterContext";
 
 function Login() {
 
-const {  getuserLogin,getPassLogin,loginInfo,verifyUser} = UseRegister()
+const {  getuserLogin,getPassLogin,loginInfo,verifyUser,login} = UseRegister()
 
   return (
     <div className="login">
@@ -55,13 +56,14 @@ const {  getuserLogin,getPassLogin,loginInfo,verifyUser} = UseRegister()
              
             />
           </div>
-          <Button className={'mx-auto d-block mt-25 pl-50 pr-50 boradius-4'} onClick={()=>verifyUser()} >Log In</Button>
+          <Button disabled={login} className={'mx-auto d-block mt-25 pl-50 pr-50 boradius-4'} onClick={()=>verifyUser()} >Log In</Button>
         </div>
        <DirectUser message={"Dont't have an account "} action={"Sign Up"} page="signup"/>
+      
       </div>
       
     </form>
-    
+    {login&&<Alert message={"Successfully Login"}/>}
     </div>
   );
 }

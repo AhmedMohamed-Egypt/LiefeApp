@@ -1,34 +1,14 @@
 {
   "users": [
     {
-      "username": "ahmed",
-      "password": "123456789",
+      "username": "sedra",
+      "password": "2006",
       "id": 1
     },
     {
-      "username": "rania",
-      "password": "123",
+      "username": "Akram",
+      "password": "2008",
       "id": 2
-    },
-    {
-      "username": "reham",
-      "password": "250",
-      "id": 3
-    },
-    {
-      "username": "hadeer",
-      "password": "197",
-      "id": 4
-    },
-    {
-      "username": "Gamal",
-      "password": "9850",
-      "id": 5
-    },
-    {
-      "username": "ragab",
-      "password": "2005",
-      "id": 6
     }
   ]
 }

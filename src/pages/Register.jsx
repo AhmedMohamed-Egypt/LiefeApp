@@ -46,7 +46,7 @@ function Register() {
                 aria-label="Password"
                 aria-describedby="basic-addon2"
                 value={userInfo.password}
-                onChange={(e) => getPassWord(+e.target.value)}
+                onChange={(e) => getPassWord(e.target.value)}
               />
               {<ErrorForm message={password&&errorMessage.passMsg}/>}
             </div>

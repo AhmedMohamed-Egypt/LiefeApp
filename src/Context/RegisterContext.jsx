@@ -109,7 +109,7 @@ function reducer(snState, action) {
 }
 
 function RegisterProvider({ children }) {
-  const [{ userInfo, errors, posted, loginInfo }, dispatch] = useReducer(
+  const [{ userInfo, errors, posted, loginInfo,login }, dispatch] = useReducer(
     reducer,
     initialState
   );
@@ -180,6 +180,7 @@ function RegisterProvider({ children }) {
         loginInfo,
         getPassLogin,
         verifyUser,
+        login
       }}
     >
       {children}
