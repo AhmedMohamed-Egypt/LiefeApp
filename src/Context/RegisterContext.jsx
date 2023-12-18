@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 
 const registerContext = createContext();
 
@@ -6,22 +6,24 @@ const initialState = {
   userInfo: {
     username: "",
     password: "",
-    id:"",
+    id: "",
+  },
+  loginInfo: {
+    username: "",
+    password: "",
   },
   errors: {
     user: false,
     password: false,
   },
   posted: false,
-  
+  login: false,
+  users: [],
 };
 const errorMessage = {
   userMsg: "User Can not be Empty or Number",
   passMsg: "Password can not be empty",
 };
-
-
-
 
 function reducer(snState, action) {
   switch (action.type) {
@@ -31,7 +33,7 @@ function reducer(snState, action) {
       return {
         ...snState,
         userInfo: { ...snState.userInfo, username: username },
-        errors: { ...snState.errors, user: false},
+        errors: { ...snState.errors, user: false },
       };
     }
     case "changePass": {
@@ -44,9 +46,8 @@ function reducer(snState, action) {
     }
 
     case "getAllInfo": {
-  
       let userError = false,
-       passwordError = false
+        passwordError = false;
       if (
         !snState.userInfo.username.length ||
         !isNaN(snState.userInfo.username)
@@ -56,18 +57,49 @@ function reducer(snState, action) {
       if (!snState.userInfo.password.length) {
         passwordError = true;
       }
-    
 
       return {
         ...snState,
         userInfo: { ...snState.userInfo },
-        errors: {  user: userError, password: passwordError },
-        
+        errors: { user: userError, password: passwordError },
       };
     }
 
-    case 'post':{
-      return {...snState,userInfo:{...snState.userInfo,username:'',password:'',posted:true}}
+    case "post": {
+      return {
+        ...snState,
+        userInfo: { ...snState.userInfo, username: "", password: "" },
+        posted: true,
+      };
+    }
+    case "getUserLogin": {
+      return {
+        ...snState,
+        loginInfo: { ...snState.loginInfo, username: action.payload },
+      };
+    }
+    case "getPassLogin": {
+      return {
+        ...snState,
+        loginInfo: { ...snState.loginInfo, password: action.payload },
+      };
+    }
+    case "getUser": {
+      return { ...snState, users: [...action.payload] };
+    }
+    case "verify": {
+      const filterUsers = snState.users.filter((item) => {
+        if (
+          item.username === snState.loginInfo.username &&
+          item.password === snState.loginInfo.password
+        ) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+
+      return { ...snState, login: ((filterUsers[0]?.username&&true) || false) };
     }
 
     default: {
@@ -77,7 +109,10 @@ function reducer(snState, action) {
 }
 
 function RegisterProvider({ children }) {
-  const [{ userInfo, errors }, dispatch] = useReducer(reducer, initialState);
+  const [{ userInfo, errors, posted, loginInfo }, dispatch] = useReducer(
+    reducer,
+    initialState
+  );
 
   function getUserName(username) {
     dispatch({ type: "change", payload: username });
@@ -86,11 +121,10 @@ function RegisterProvider({ children }) {
     dispatch({ type: "changePass", payload: password });
   }
 
- async function getAllInfo() {
-    dispatch({ type: "getAllInfo",payload:true });
-    
-    
-      async function postUsers(userCredntials) {
+  async function getAllInfo() {
+    dispatch({ type: "getAllInfo", payload: true });
+
+    async function postUsers(userCredntials) {
       const res = await fetch(`http://localhost:8000/users`, {
         method: "POST",
         body: JSON.stringify(userCredntials),
@@ -98,22 +132,39 @@ function RegisterProvider({ children }) {
           "Content-Type": "application/json",
         },
       });
-      const data = res.json()
-      if(res.ok){
-        dispatch({type:'post',payload:data})
+      const data = res.json();
+      if (res.ok) {
+        console.log(res.ok);
+        dispatch({ type: "post", payload: data });
       }
-      
     }
 
-    if(userInfo.username  && userInfo.password){
-      await postUsers(userInfo)
+    if (userInfo.username && userInfo.password) {
+      await postUsers(userInfo);
     }
-  
-  
-    
-    
   }
 
+  function getuserLogin(user) {
+    dispatch({ type: "getUserLogin", payload: user });
+  }
+  function getPassLogin(pass) {
+    dispatch({ type: "getPassLogin", payload: pass });
+  }
+
+  function verifyUser() {
+    dispatch({ type: "verify" });
+  }
+
+  useEffect(() => {
+    async function getUsers() {
+      const res = await fetch("http://localhost:8000/users");
+      const data = await res.json();
+
+      dispatch({ type: "getUser", payload: data });
+    }
+
+    getUsers();
+  }, [userInfo]);
 
   return (
     <registerContext.Provider
@@ -124,6 +175,11 @@ function RegisterProvider({ children }) {
         getAllInfo,
         errors,
         errorMessage,
+        posted,
+        getuserLogin,
+        loginInfo,
+        getPassLogin,
+        verifyUser,
       }}
     >
       {children}

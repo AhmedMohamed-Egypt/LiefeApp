@@ -1,6 +1,8 @@
 import DirectUser from "../components/DirectUser";
 import Button from "../components/UI/Button";
 import img from '../assets/logo-sm.png'
+import { UseRegister } from "../Context/RegisterContext";
+
 
 
 
@@ -8,7 +10,7 @@ import img from '../assets/logo-sm.png'
 
 function Login() {
 
-
+const {  getuserLogin,getPassLogin,loginInfo,verifyUser} = UseRegister()
 
   return (
     <div className="login">
@@ -29,6 +31,9 @@ function Login() {
               placeholder="Username"
               aria-label="Username"
               aria-describedby="basic-addon1"
+              value={loginInfo.username}
+              onChange={(e)=>getuserLogin(e.target.value)}
+         
               
              
             />
@@ -43,11 +48,14 @@ function Login() {
               placeholder="Password"
               aria-label="Username"
               aria-describedby="basic-addon1"
+              value = {loginInfo.password}
+              onChange={(e)=>{getPassLogin(e.target.value)}}
+            
            
              
             />
           </div>
-          <Button className={'mx-auto d-block mt-25 pl-50 pr-50 boradius-4'} >Log In</Button>
+          <Button className={'mx-auto d-block mt-25 pl-50 pr-50 boradius-4'} onClick={()=>verifyUser()} >Log In</Button>
         </div>
        <DirectUser message={"Dont't have an account "} action={"Sign Up"} page="signup"/>
       </div>

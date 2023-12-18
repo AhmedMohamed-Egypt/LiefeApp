@@ -1,10 +1,11 @@
 import { UseRegister } from "../Context/RegisterContext";
+import Alert from "../components/Alert";
 import DirectUser from "../components/DirectUser";
 import ErrorForm from "../components/ErrorForm";
 import Button from "../components/UI/Button";
 
 function Register() {
-  const { userInfo, getUserName, getPassWord, getAllInfo, errors,errorMessage } =
+  const { userInfo, getUserName, getPassWord, getAllInfo, errors,errorMessage ,posted} =
     UseRegister();
 
   const { user, password } = errors;
@@ -45,7 +46,7 @@ function Register() {
                 aria-label="Password"
                 aria-describedby="basic-addon2"
                 value={userInfo.password}
-                onChange={(e) => getPassWord(e.target.value)}
+                onChange={(e) => getPassWord(+e.target.value)}
               />
               {<ErrorForm message={password&&errorMessage.passMsg}/>}
             </div>
@@ -53,6 +54,7 @@ function Register() {
           <Button
             className={"mx-auto d-block mt-25 pl-50 pr-50 boradius-4"}
             onClick={() => getAllInfo()}
+            disabled={posted}
           >
             Sign Up
           </Button>
@@ -62,6 +64,8 @@ function Register() {
             page="/"
           />
         </div>
+        {posted&&<Alert message='Sign Up Successfully'/>}
+        
       </form>
     </div>
   );
