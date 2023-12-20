@@ -21,7 +21,9 @@ function Home() {
                 <div className="app-pages">
 
                    
-                  <Outlet/>
+                  
+                    <Outlet/>
+                 
                 </div>
             </div>
         </div>
