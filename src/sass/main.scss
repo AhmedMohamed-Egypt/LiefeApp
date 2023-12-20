@@ -1,6 +1,7 @@
 @import './colors';
 @import '_reset.scss';
+@import './helpers';
 @import './mixins';
 @import './typography';
 @import './Login';
-@import './helpers'
+@import './app.scss'

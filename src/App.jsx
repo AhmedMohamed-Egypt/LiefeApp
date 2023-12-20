@@ -6,6 +6,8 @@ import Register from "./pages/Register";
 
 import Home from "./pages/Home";
 import { RegisterProvider } from "./Context/RegisterContext";
+import Food from "./components/UI/core/Food";
+import Landing from './components/UI/Landing'
 
 function App() {
   return (
@@ -15,8 +17,9 @@ function App() {
       <Routes>
         <Route index path="/" element={<Login />} />
         <Route path="/signup" element={<Register />} />
-        <Route path = "/App" element ={<Home/>}>
-          
+        <Route path = "/app" element ={<Home/>}>
+          <Route index element={<Landing/>}/>
+          <Route path="Food" element = {<Food/>}/>
         </Route>
         
       </Routes>

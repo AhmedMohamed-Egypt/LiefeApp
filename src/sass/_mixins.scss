@@ -30,11 +30,18 @@ $px:'px';
     .pl-#{$i}{
         padding-left: #{$i}+$px !important;
     }
+    .pdng-#{$i}{
+        padding: #{$i}+$px !important;;
+    }
     .boradius-#{$i}{
         border-radius:#{$i}+$px !important; ;
     }
 }
-
+@for $i from 1 to 10{
+    .weight-#{$i * 100}{
+        font-weight: #{$i * 100};
+    }
+}
 //Center Element 
 
 @mixin cntr{

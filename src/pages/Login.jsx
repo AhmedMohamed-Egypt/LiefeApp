@@ -14,7 +14,7 @@ function Login() {
   const navigate = useNavigate()
   if(login) {
     setTimeout(()=>{
-      navigate('/App')
+      navigate('/app')
     },2500)
   }
 
