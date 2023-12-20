@@ -1,0 +1,22 @@
+button.orderNow{
+    background-color: $orange !important;
+    border: none;
+    border: 2px solid $orange !important;
+  
+    background-image: -webkit-linear-gradient(30deg, $orange 50%, transparent 50%) !important;
+    background-image: linear-gradient(30deg, $orange 50%, transparent 50%) !important;
+    background-size: 500px !important;
+    background-repeat: no-repeat  !important;
+    background-position: 0% !important;
+    -webkit-transition: background 300ms ease-in-out !important;
+    transition: background 300ms ease-in-out !important;
+    padding: 10px 40px;
+    font-size: 18px;
+    
+    &:hover{
+        border: 2px solid $orange !important;
+        color: $orange !important;
+        background-position: 100% !important;
+    background-color: transparent !important;
+    }
+}
