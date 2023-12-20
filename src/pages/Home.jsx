@@ -1,10 +1,14 @@
 
+import { UseRegister } from "../Context/RegisterContext";
+
 
 function Home() {
+
+    const {loginInfo} = UseRegister()
    
     return (
         <div>
-            Hello Dear 
+            Hello {loginInfo.username} 
         </div>
     )
 }

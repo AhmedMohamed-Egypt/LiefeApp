@@ -1,19 +1,9 @@
 {
   "users": [
     {
-      "username": "sedra",
-      "password": "2006",
+      "username": "ahmed",
+      "password": "123",
       "id": 1
-    },
-    {
-      "username": "Akram",
-      "password": "2008",
-      "id": 2
-    },
-    {
-      "username": "metwaly",
-      "password": "55",
-      "id": 3
     }
   ]
 }

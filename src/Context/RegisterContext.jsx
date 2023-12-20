@@ -88,6 +88,9 @@ function reducer(snState, action) {
       return { ...snState, users: [...action.payload] };
     }
     case "verify": {
+      if(!snState.loginInfo.username.length || !snState.loginInfo.password.length) {
+        return {...snState}
+      } 
       const filterUsers = snState.users.filter((item) => {
         if (
           item.username === snState.loginInfo.username &&
@@ -98,9 +101,9 @@ function reducer(snState, action) {
           return false;
         }
       });
-const successLogin = filterUsers[0]?.username&&true
 
-      return { ...snState, login: ((filterUsers[0]?.username&&true) || false)};
+
+      return { ...snState, login: ((filterUsers[0]?.username&& filterUsers[0]?.password && true) || false)};
     }
 
     default: {
