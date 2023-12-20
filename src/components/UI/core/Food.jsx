@@ -4,7 +4,7 @@
 import Button from '../Button';
 import { useState } from 'react';
 import FoodApp from './FoodApp';
-
+import img from '../../../../public/imgs/photo-1.png'
 function Food() {
    
     const [show,setShow] = useState(true)
@@ -27,7 +27,7 @@ function Food() {
             </div>
            
             <div>
-                <img src="../public/imgs/photo-1.png" alt="Home-Delivery-Food" />
+                <img src={img} alt="Home-Delivery-Food" />
             </div>
           </div>
          
