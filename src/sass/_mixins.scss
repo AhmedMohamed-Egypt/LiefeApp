@@ -50,6 +50,9 @@ $px:'px';
     left: 50%;
     transform: translate(-50%,-50%);
 }
+.cntrElmnt{
+    @include cntr()
+}
 @mixin aftr{
     content: "";
     position: absolute;

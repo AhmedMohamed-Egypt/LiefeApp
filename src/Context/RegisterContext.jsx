@@ -19,6 +19,7 @@ const initialState = {
   posted: false,
   login: undefined,
   users: [],
+  errorServer:''
 };
 const errorMessage = {
   userMsg: "User Can not be Empty or Number",
@@ -105,6 +106,9 @@ function reducer(snState, action) {
 
       return { ...snState, login: ((filterUsers[0]?.username&& filterUsers[0]?.password && true) || false)};
     }
+    case 'error':{
+      return {...snState,errorServer:action.payload}
+    }
 
     default: {
       throw new Error("Action not Know");
@@ -113,7 +117,7 @@ function reducer(snState, action) {
 }
 
 function RegisterProvider({ children }) {
-  const [{ userInfo, errors, posted, loginInfo,login }, dispatch] = useReducer(
+  const [{ userInfo, errors, posted, loginInfo,login,errorServer }, dispatch] = useReducer(
     reducer,
     initialState
   );
@@ -129,18 +133,28 @@ function RegisterProvider({ children }) {
     dispatch({ type: "getAllInfo", payload: true });
 
     async function postUsers(userCredntials) {
-      const res = await fetch(`http://localhost:8000/users`, {
-        method: "POST",
-        body: JSON.stringify(userCredntials),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const data = res.json();
-      if (res.ok) {
-        console.log(res.ok);
-        dispatch({ type: "post", payload: data });
+      try{
+        const res = await fetch(`http://localhost:8000/userseee`, {
+          method: "POST",
+          body: JSON.stringify(userCredntials),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const data = res.json();
+        if (res.ok) {
+          console.log(res.ok);
+          dispatch({ type: "post", payload: data });
+        }else {
+          dispatch({type:'error',payload:'there is an error for connection'})
+        }
+
+      
+      }catch(error){
+        dispatch({type:'error',payload:error.message})
+        
       }
+   
     }
 
     if (userInfo.username && userInfo.password) {
@@ -184,7 +198,8 @@ function RegisterProvider({ children }) {
         loginInfo,
         getPassLogin,
         verifyUser,
-        login
+        login,
+        errorServer
       }}
     >
       {children}

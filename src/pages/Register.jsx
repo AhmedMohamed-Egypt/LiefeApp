@@ -6,7 +6,7 @@ import ErrorForm from "../components/ErrorForm";
 import Button from "../components/UI/Button";
 
 function Register() {
-  const { userInfo, getUserName, getPassWord, getAllInfo, errors,errorMessage ,posted} =
+  const { userInfo, getUserName, getPassWord, getAllInfo, errors,errorMessage ,posted,errorServer} =
     UseRegister();
 
   const { user, password } = errors;
@@ -67,11 +67,12 @@ function Register() {
             <Link to="/" className={'singup fw-bold ml-10'} >Sign In</Link>
             
         </div>
-
+        {errorServer&&<p className="text-center mt-5 text-danger">{errorServer}</p>}
         </div>
         {posted&&<Alert message='Sign Up Successfully'/>}
         
       </form>
+     
     </div>
   );
 }

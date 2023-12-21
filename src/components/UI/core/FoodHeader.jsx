@@ -1,3 +1,5 @@
+import FoodCart from "./FoodCart"
+
 function FoodHeader() {
     return (
         <div className="d-flex justify-content-between aling-items-center">
@@ -26,9 +28,7 @@ function FoodHeader() {
   <input type="text" className="form-control" placeholder="Search For Meals" aria-label="Username" aria-describedby="basic-addon1"/>
 </div>
             </div>
-            <div>
-                Cart(0)
-            </div>
+           <FoodCart/>
         </div>
     )
 }

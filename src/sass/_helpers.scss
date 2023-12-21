@@ -19,3 +19,10 @@ a{
     color: inherit;
     display: block;
 }
+input{
+    &:focus,&:hover{
+        border: 1px solid inherit !important;
+        background-color: #fff !important;
+        outline: 0;
+    }
+}
