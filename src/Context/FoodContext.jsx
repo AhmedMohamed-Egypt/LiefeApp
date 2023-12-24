@@ -45,6 +45,13 @@ function reducer(snState, action) {
     case 'cancelAnim':{
       return{...snState,shaking:false}
     }
+    case 'inc':{
+      console.log(action.payload)
+      const incItems = snState.filterdMeals.map((item)=>{
+        return {...item,noOfItems:item.noOfItems++}
+      })
+      return{...snState,filterdMeals:incItems}
+    }
 
     default: {
       throw new Error("Action not known");
@@ -66,9 +73,12 @@ function FoodProvider({ children }) {
   function hideModal(){
     dispatch({type:'hideBackdrop'})
   }
+  function increaseItems(index){
+    dispatch({type:'inc',payload:index})
+  }
   
   return (
-    <FoodContext.Provider value={{shaking,currencySign, meals, error, isLoading ,getInfoCart,added,hideModal,filterdMeals}}>
+    <FoodContext.Provider value={{shaking,currencySign, meals, error, isLoading ,getInfoCart,added,hideModal,filterdMeals,increaseItems}}>
       {children}
     </FoodContext.Provider>
   );

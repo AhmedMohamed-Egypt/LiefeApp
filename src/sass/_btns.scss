@@ -1,3 +1,8 @@
+.rstBtn{
+    background: none;
+    border: none;
+
+}
 button.orderNow{
     background-color: $orange !important;
     border: none;
@@ -61,4 +66,33 @@ button.cartFoodBtn{
         }
     }
    
+}
+button.inc,button.dec{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    color: #fff;
+    transition: .3s;
+    position: relative;
+    i{
+        @include cntr();
+        color: #fff;
+    }
+   
+}
+button.inc{
+    background-color: $green;
+    &:hover,&:focus,&:active{
+        background-color: $green !important;
+        transform: scale(1.1);
+    }
+
+}
+button.dec{
+    background-color: $red;
+    margin-left: 10px;
+    &:hover,&:focus,&:active{
+        background-color: $red !important;
+        transform: scale(1.1)
+    }
 }
