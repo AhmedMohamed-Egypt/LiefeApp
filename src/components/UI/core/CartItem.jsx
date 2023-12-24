@@ -1,12 +1,14 @@
 import { UseFood } from '../../../Context/FoodContext'
 import Button from '../Button'
-function CartItem({item}) {
+function CartItem({item,index}) {
     const {name,price,description,image} = item
     const {getInfoCart,added} = UseFood()
     const handleClick = (e)=>{
         e.preventDefault()
       getInfoCart(name,price)
+      console.log(index)
     }
+    
  
     return (
         

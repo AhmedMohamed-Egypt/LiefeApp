@@ -7,7 +7,7 @@ import Modal from "../Modal";
 
 function FoodApp() {
   const { meals, error, isLoading,added ,hideModal} = UseFood();
-  const items = meals.map((item) => <CartItem key={item.id} item={item} />);
+  const items = meals.map((item,index) => <CartItem key={item.id} index={index} item={item} />);
   const showItems = !isLoading && !error;
   const handleAdded = ()=>{
     hideModal()
@@ -33,7 +33,8 @@ function FoodApp() {
           </div>
         )}
       </div>
-      {added&& <Modal onClick={handleAdded} title={'Attention'}>This is Item Already to the Cart, if you want to remove to add more , you can go to your Cart </Modal>}
+      {added&& <Modal onClick={handleAdded} title={'Attention'}>
+        <p className="weight-500"> This is Item Already Added to the Cart, if you want to remove or  add more , you can go to your Cart </p></Modal>}
     </div>
   );
 }
