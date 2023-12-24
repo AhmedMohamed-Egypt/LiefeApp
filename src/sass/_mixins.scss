@@ -37,6 +37,9 @@ $px:'px';
         border-radius:#{$i}+$px !important; ;
     }
 }
+.pd-0{
+    padding: 0 !important;
+}
 @for $i from 1 to 10{
     .weight-#{$i * 100}{
         font-weight: #{$i * 100};

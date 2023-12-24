@@ -1,7 +1,7 @@
-function Button({children,onClick,className,disabled}) {
+function Button({children,onClick,className,disabled,type}) {
     const classes =  className || ''
     return (
-        <button disabled={disabled} className={`btn btn-primary ${classes}`} onClick={onClick} type="button">{children} </button>
+        <button disabled={disabled} className={`btn btn-primary ${classes}`} onClick={onClick} type={type||'button'}>{children} </button>
     )
 }
 

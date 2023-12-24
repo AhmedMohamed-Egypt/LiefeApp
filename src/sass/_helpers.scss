@@ -26,3 +26,9 @@ input{
         outline: 0;
     }
 }
+.rotate{
+    transition: .25s;
+    &:hover{
+        transform: rotate(180deg) scale(.5);
+    }
+}

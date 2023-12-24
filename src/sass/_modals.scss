@@ -1,0 +1,19 @@
+.modalBackdrop{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $modalBk;
+}
+.overlay{
+    &__content{
+        @include cntr();
+        padding:10px 20px;
+        border-radius: 10px;
+        background-color: $white;
+        width: 500px;
+        max-width: 90%;
+
+    }
+}

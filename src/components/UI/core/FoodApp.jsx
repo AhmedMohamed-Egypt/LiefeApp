@@ -3,11 +3,16 @@ import FoodHeader from "./FoodHeader";
 import CartItem from "./CartItem";
 import OrangeLoading from "../../OrangeLoading";
 import Alert from "../../Alert";
+import Modal from "../Modal";
 
 function FoodApp() {
-  const { meals, error, isLoading } = UseFood();
+  const { meals, error, isLoading,added ,hideModal} = UseFood();
   const items = meals.map((item) => <CartItem key={item.id} item={item} />);
   const showItems = !isLoading && !error;
+  const handleAdded = ()=>{
+    hideModal()
+   
+  }
 
   return (
     <div className={`foodLayout pt-50`}>
@@ -23,10 +28,12 @@ function FoodApp() {
         {showItems && (
           <div className=" animate__fadeIn animate__animated foodLayout__container">
             <div className="row">{items}</div>
+
             
           </div>
         )}
       </div>
+      {added&& <Modal onClick={handleAdded} title={'Attention'}>This is Item Already to the Cart, if you want to remove to add more , you can go to your Cart </Modal>}
     </div>
   );
 }
