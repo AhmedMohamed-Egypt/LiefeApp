@@ -10,6 +10,12 @@ function FoodCart() {
   
   const noOfItems = filterdMeals.map((item)=>item.noOfItems).reduce((acc,cur)=>acc+cur,0)
 
+  const totalPrice = filterdMeals.map((item)=>{return {num:+item.noOfItems,price:+item.mealPrice}}).reduce((acc,cur)=>acc+(cur.num*cur.price),0).toFixed(2)
+
+
+  
+  console.log(totalPrice)
+
 
   const items = filterdMeals.length > 0
   const handleCartItem=()=>{
@@ -23,8 +29,10 @@ function FoodCart() {
         <i className="bi bi-cart d-inline-block ml-5"></i>
       </Button>
       {items&&show && <Modal  title={'Your Meals '} onClick={()=>setShow(false)} className={(filterdMeals.length>=5)&&'scrolling'}>
-        {filterdMeals.map((item,index)=>{
-      return(   <div key={index} className='d-flex   mb-8 justify-content-between' >
+       <>
+       {filterdMeals.map((item,index)=>{
+      return(  
+       <div key={index} className='d-flex   mb-8 justify-content-between' >
       <div className='w-75 border-bottom d-flex align-items-center'>
       <p className='mb-0 mr-10'>{index+1}-</p>
         <p className='mb-0  fst-italic weight-500 w-150' >{item.mealName}</p>
@@ -35,9 +43,20 @@ function FoodCart() {
         <button className='rstBtn inc' onClick={(e)=>{increaseItems(index);e.preventDefault()}}><i className="bi bi-plus"></i></button>
         <button className='rstBtn dec' onClick={(e)=>{e.preventDefault();decrement(index)}}><i className="bi bi-dash"></i></button>
       </div>
-      </div>)
+     
+      </div>
+     
+      
+      
+      
+      )
         })}
-        </Modal>}
+       <h3>Total Price {totalPrice}</h3>
+       </>
+
+        </Modal>
+        
+        }
       </>
      
     )
