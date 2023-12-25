@@ -77,6 +77,16 @@ function reducer(snState, action) {
       return {...snState,filterdMeals:decItems,selectedMeals:decItems}
     }
 
+    case "remove":{
+      const removedMeals = snState.filterdMeals.filter((item,index)=> {
+       
+        if(index !== action.payload){
+          return {...item}
+        }
+      })
+      return {...snState,filterdMeals:removedMeals,selectedMeals:removedMeals}
+    }
+
     default: {
       throw new Error("Action not known");
     }
@@ -105,6 +115,10 @@ function FoodProvider({ children }) {
   function decrement(index){
     dispatch({type:"dec",payload:index})
   }
+
+  function deleteItem(index){
+    dispatch({type:'remove',payload:index})
+  }
   useEffect(() => {
     dispatch({ type: "inc" });
     dispatch({type:"dec"})
@@ -123,7 +137,9 @@ function FoodProvider({ children }) {
         hideModal,
         filterdMeals,
         increaseItems,
-        decrement
+        decrement,
+        deleteItem
+
 
 
       }}
