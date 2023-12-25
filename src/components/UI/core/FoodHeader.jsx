@@ -1,6 +1,16 @@
+import { useState } from "react"
+import { UseFood } from "../../../Context/FoodContext"
 import FoodCart from "./FoodCart"
 
 function FoodHeader() {
+  const {searchMeals} = UseFood()
+  const [val,setVal] = useState('')
+
+  const handleChange = (keyword)=>{
+    setVal(keyword)
+    searchMeals(keyword)
+  }
+
     return (
         <div className="d-flex justify-content-between aling-items-center">
             <div>
@@ -25,7 +35,7 @@ function FoodHeader() {
             <div className="foodLayout__search">
             <div className="input-group mb-3">
   
-  <input type="text" className="form-control" placeholder="Search For Meals" aria-label="Username" aria-describedby="basic-addon1"/>
+  <input type="text" value={val} onChange={(e)=>{handleChange(e.target.value)}} className="form-control" placeholder="Search For Meals" aria-label="Username" aria-describedby="basic-addon1"/>
 </div>
             </div>
            <FoodCart/>
