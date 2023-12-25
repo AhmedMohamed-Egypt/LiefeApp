@@ -1,5 +1,5 @@
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { UseFood } from '../../../Context/FoodContext'
 import Button from '../Button'
 import Modal from '../Modal'
@@ -12,12 +12,14 @@ function FoodCart() {
 
   const totalPrice = filterdMeals.map((item)=>{return {num:+item.noOfItems,price:+item.mealPrice}}).reduce((acc,cur)=>acc+(cur.num*cur.price),0).toFixed(1)
 
-
-  
-  
-
-
   const items = filterdMeals.length > 0
+  
+  useEffect(()=>{
+    setShow(items.length===0&&false)
+  },[items])
+
+
+  
   const handleCartItem=()=>{
    
     setShow(items&&true)
