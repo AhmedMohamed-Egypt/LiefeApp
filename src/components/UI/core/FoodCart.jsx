@@ -18,11 +18,6 @@ function FoodCart() {
   useEffect(()=>{
     setShow(items.length===0&&false)
   },[items])
-
-//e2f8897195ae34e76dee1435b9a4da55
-
-    
-  
   const handleCartItem=()=>{
    
     setShow(items&&true)

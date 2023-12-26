@@ -19,14 +19,14 @@ function Currency() {
     const [show,setShow] = useState(false)
 
     const handleChange = (e)=>{
-        setVal(e.target.value)
-        getCurrency(e.target.value)
+        setVal(+e.target.value)
+        getCurrency(+e.target.value)
       
        
     }
-    
-  
    
+  
+   const txtSelect = val === ''?'Change your Currency':(val===defaultValue[0].index?'Change your Currency':'Reset Currency')
     
    
     return (
@@ -35,7 +35,7 @@ function Currency() {
             
             {show&&<select className="form-select pe-pointer" aria-label="Default select example" value={val} onChange={(e)=>handleChange(e)}>
 
-  <option value={defaultValue[0].index}>Change to your Currency</option>
+  <option value={defaultValue[0].index}>{txtSelect}</option>
   {currencyReg.map((item,index)=><option value={index} key={index}>{item.cur}</option>)}
 
 </select>}
