@@ -52,7 +52,7 @@ function FoodCart() {
       
       )
         })}
-       <h3 className='mt-35 size-18 weight-700 fst-italic'>Total Price {currencySign }{ totalPrice}</h3>
+       <h3 className='mt-35 size-18 weight-700 fst-italic'>Total Price {currencySign }<span className='d-inline-block pl-15'>{ totalPrice}</span></h3>
        </>
 
         </Modal>
