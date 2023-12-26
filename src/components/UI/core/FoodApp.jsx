@@ -4,6 +4,7 @@ import CartItem from "./CartItem";
 import OrangeLoading from "../../OrangeLoading";
 import Alert from "../../Alert";
 import Modal from "../Modal";
+import Currency from "./Currency";
 
 function FoodApp() {
   const {  error, isLoading,added ,hideModal,searchedMealsFilter} = UseFood();
@@ -40,6 +41,7 @@ function FoodApp() {
       </div>
       {added&& <Modal onClick={handleAdded} title={'Attention'}>
         <p className="weight-500"> This is Item Already Added to the Cart, if you want to remove or  add more , you can go to your Cart </p></Modal>}
+   <Currency/>
     </div>
   );
 }

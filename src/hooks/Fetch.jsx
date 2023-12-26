@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 
 function FetchData(link) {
+  const [currency,setCurrency] = useState([])
   const [meals, setMeals] = useState([]);
+  
   const [error, setError] = useState("");
   const [isLoading,setIsloading] = useState(false)
   useEffect(() => {
@@ -12,6 +14,7 @@ function FetchData(link) {
         const data = await res.json();
         if (res.ok) {
           setMeals(data);
+          setCurrency(data)
         } else {
           throw new Error("Error Conection");
         }
@@ -23,7 +26,6 @@ function FetchData(link) {
     getData();
   }, []);
 
-  return { meals, error,isLoading };
+  return { meals,currency , error,isLoading };
 }
-
 export { FetchData };

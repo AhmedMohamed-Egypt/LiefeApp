@@ -9,13 +9,18 @@ const initalState = {
   currencySign: "$",
   shaking: false,
   allMeals :[],
-  searchedMealsFilter :[]
+  searchedMealsFilter :[],
+  currencyData:[]
  
 };
 
 function reducer(snState, action) {
+
   
   switch (action.type) {
+    case "fetchCurrency":{
+      return {...snState,currencyData:action.payload}
+    }
     case "get":{
       return {...snState,allMeals:action.payload,searchedMealsFilter:action.payload}
     }
@@ -110,6 +115,18 @@ function reducer(snState, action) {
       
       
     }
+    case "getCurrency":{
+      const prices = snState.allMeals.map((item)=>item.price)
+      const index = action.payload
+
+      const curData =  Object.keys(snState.currencyData.data).map((key) => {return {cur:key, val:snState.currencyData.data[key]}});
+      const currencyValue = curData[index].val
+      const currencySign = curData[index].cur
+      const currnecy= snState.searchedMealsFilter.map((item,index)=>{
+        return {...item,price:(prices[index]*currencyValue).toFixed(2)}
+      })
+      return {...snState,searchedMealsFilter:currnecy,currencySign:currencySign}
+    }
 
     default: {
       throw new Error("Action not known");
@@ -119,6 +136,10 @@ function reducer(snState, action) {
 
 function FoodProvider({ children }) {
   const { meals, error, isLoading } = FetchData(`http://localhost:8000/meals`);
+  const {currency} = FetchData(`https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_huwSkG0Y1ktCuzTwvR6PdEfL0nJWd68LdSYIkqzo`)
+
+
+   
   const [{ added, filterdMeals, currencySign, shaking ,allMeals,searchedMealsFilter}, dispatch] = useReducer(
     reducer,
     initalState
@@ -148,11 +169,16 @@ function FoodProvider({ children }) {
   function searchMeals(keyword) {
     dispatch({ type: "search", payload: keyword });
   }
+
+  function getCurrency(index){
+    dispatch({type:"getCurrency",payload:index})
+  }
   useEffect(() => {
     dispatch({ type: "inc" });
     dispatch({ type: "dec" });
     dispatch({type:'get',payload:meals})
-  }, [meals]);
+    dispatch({type:'fetchCurrency',payload:currency})
+  }, [meals,currency]);
 
   return (
     <FoodContext.Provider
@@ -170,7 +196,9 @@ function FoodProvider({ children }) {
         decrement,
         deleteItem,
         searchMeals,
-        searchedMealsFilter
+        searchedMealsFilter,
+        currency,
+        getCurrency
       }}
     >
       {children}

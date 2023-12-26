@@ -8,9 +8,10 @@ function FoodCart() {
   const {filterdMeals,currencySign,shaking,increaseItems,decrement,deleteItem} = UseFood()
   const [show,setShow] = useState(false)
   
+  
   const noOfItems = filterdMeals.map((item)=>item.noOfItems).reduce((acc,cur)=>acc+cur,0)
 
-  const totalPrice = filterdMeals.map((item)=>{return {num:+item.noOfItems,price:+item.mealPrice}}).reduce((acc,cur)=>acc+(cur.num*cur.price),0).toFixed(1)
+  const totalPrice = filterdMeals.map((item)=>{return {num:+item.noOfItems,price:+item.mealPrice}}).reduce((acc,cur)=>acc+(cur.num*cur.price),0).toFixed(2)
 
   const items = filterdMeals.length > 0
   
@@ -18,7 +19,9 @@ function FoodCart() {
     setShow(items.length===0&&false)
   },[items])
 
+//e2f8897195ae34e76dee1435b9a4da55
 
+    
   
   const handleCartItem=()=>{
    
@@ -39,7 +42,7 @@ function FoodCart() {
       <p className='mb-0 mr-10'>{index+1}-</p>
         <p className='mb-0  fst-italic weight-500 w-150' >{item.mealName}</p>
         <p className='mb-0 ml-15 noOfItems size-15' >{item.noOfItems}</p>
-       <p className='ml-auto mb-0  weight-bold size-18'><span className='d-inline-block width20Px text-end'>{currencySign}</span> <span className='text-ceter d-inline-block width50Px'>{item.mealPrice}</span></p>     
+       <p className='ml-auto mb-0  weight-bold size-18'><span className='d-inline-block width20Px text-end mr-15 '>{currencySign}</span> <span className='text-ceter d-inline-block width50Px'>{item.mealPrice}</span></p>     
       </div>
       <div className='d-flex align-items-center'>
         <button className='rstBtn inc' onClick={(e)=>{increaseItems(index);e.preventDefault()}}><i className="bi bi-plus"></i></button>
