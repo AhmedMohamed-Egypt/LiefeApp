@@ -3,57 +3,54 @@ import { FetchData } from "../hooks/Fetch";
 
 const FoodContext = createContext();
 const initalState = {
-  selectedMeals: [],
   filterdMeals: [],
-  added: undefined,
   currencySign: "$",
   shaking: false,
-  allMeals :[],
-  searchedMealsFilter :[],
-  currencyData:[]
- 
+  allMeals: [],
+  searchedMealsFilter: [],
+  currencyData: {},
+  added: false,
+  valueMeal: 1,
 };
 
 function reducer(snState, action) {
-
-  
   switch (action.type) {
-    case "fetchCurrency":{
-      return {...snState,currencyData:action.payload}
+    case "fetchCurrency": {
+      return { ...snState, currencyData: action.payload };
     }
-    case "get":{
-      return {...snState,allMeals:action.payload,searchedMealsFilter:action.payload}
+
+    case "get": {
+      return {
+        ...snState,
+        allMeals: action.payload,
+        searchedMealsFilter: action.payload,
+      };
     }
     case "getInfo": {
-      const mealName = action.payload.name;
-      const mealPrice = action.payload.price;
+      const updateSelectedItems = snState.allMeals.reduce(
+        (acc, cur) => {
+          if (cur.name === action.payload.name) {
+            return [...acc, { ...cur, noOfItems: 1 }];
+          } else {
+            return [...acc];
+          }
+        },
 
-      const uniqueMeals = [
-        ...snState.selectedMeals,
-        { mealName: mealName, mealPrice: mealPrice, noOfItems: 1 },
-      ].reduce((acc, cur) => {
-        if (!acc.map((item) => item.mealName).includes(cur.mealName)) {
-          snState.shaking = true;
-          return [...acc, cur];
-        } else {
-          snState.shaking = false;
-          return [...acc];
-        }
-      }, []);
+        []
+      );
 
-      //Checking if added before
-      const checkAdd = snState.filterdMeals
-        .map((item) => item.mealName)
-        .includes(mealName);
+      const checkAdded = snState.filterdMeals
+        .map((item) => item.name)
+        .includes(action.payload.name);
 
       return {
         ...snState,
-        selectedMeals: [
-          ...snState.selectedMeals,
-          { mealName, mealPrice, noOfItems: 1 },
-        ],
-        filterdMeals: uniqueMeals,
-        added: checkAdd,
+
+        filterdMeals: checkAdded
+          ? [...snState.filterdMeals]
+          : [...snState.filterdMeals, ...updateSelectedItems],
+        added: checkAdded,
+        shaking: !checkAdded,
       };
     }
     case "hideBackdrop": {
@@ -71,7 +68,7 @@ function reducer(snState, action) {
         }
       });
 
-      return { ...snState, filterdMeals: incItems, selectedMeals: incItems };
+      return { ...snState, filterdMeals: incItems };
     }
     case "dec": {
       const decItems = snState.filterdMeals.map((item, index) => {
@@ -84,7 +81,10 @@ function reducer(snState, action) {
           return { ...item, noOfItems: item.noOfItems };
         }
       });
-      return { ...snState, filterdMeals: decItems, selectedMeals: decItems };
+      return {
+        ...snState,
+        filterdMeals: decItems,
+      };
     }
 
     case "remove": {
@@ -100,32 +100,57 @@ function reducer(snState, action) {
       };
     }
 
-    case "search":{
-     const keyword = action.payload.toLowerCase()
+    case "search": {
+      const keyword = action.payload.toLowerCase();
 
-     
-      const searchedMeals =  snState.allMeals.filter((item)=>{
-        return (item.name.toLowerCase().indexOf(keyword)>-1
-                ||
-                item.description.toLowerCase().indexOf(keyword)>-1
-        
-        )
-      })
-      return {...snState,searchedMealsFilter:(searchedMeals)}
-      
-      
+      const searchedMeals = snState.allMeals
+        .filter((item) => {
+          return (
+            item.name.toLowerCase().indexOf(keyword) > -1 ||
+            item.description.toLowerCase().indexOf(keyword) > -1
+          );
+        })
+        .map((item) => {
+          return {
+            ...item,
+            price: (item.price * snState.valueMeal).toFixed(2),
+          };
+        });
+
+      return { ...snState, searchedMealsFilter: searchedMeals };
     }
-    case "getCurrency":{
-      const prices = snState.allMeals.map((item)=>item.price)
-      const index = action.payload
+    case "getCurrency": {
+      const index = action.payload;
 
-      const curData =  Object.keys(snState.currencyData.data).map((key) => {return {cur:key, val:snState.currencyData.data[key]}});
-      const currencyValue = curData[index].val
-      const currencySign = curData[index].cur
-      const currnecy= snState.searchedMealsFilter.map((item,index)=>{
-        return {...item,price:(prices[index]*currencyValue).toFixed(2)}
-      })
-      return {...snState,searchedMealsFilter:currnecy,currencySign:currencySign}
+      const curData = Object.keys(snState.currencyData.data).map((key) => {
+        return { cur: key, val: snState.currencyData.data[key] };
+      });
+      const currencyValue = curData[index].val;
+      const currencySign = curData[index].cur;
+
+      const updateSearchedMeals = snState.allMeals.reduce((acc, cur) => {
+        if (
+          snState.searchedMealsFilter
+            .map((item) => item.name)
+            .includes(cur.name)
+        ) {
+          return [
+            ...acc,
+            { ...cur, price: (cur.price * currencyValue).toFixed(2) },
+          ];
+        } else {
+          return [...acc];
+        }
+      }, []);
+
+      return {
+        ...snState,
+
+        currencySign: currencySign,
+
+        valueMeal: currencyValue,
+        searchedMealsFilter: updateSearchedMeals,
+      };
     }
 
     default: {
@@ -136,23 +161,30 @@ function reducer(snState, action) {
 
 function FoodProvider({ children }) {
   const { meals, error, isLoading } = FetchData(`http://localhost:8000/meals`);
-  const {currency} = FetchData(`https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_huwSkG0Y1ktCuzTwvR6PdEfL0nJWd68LdSYIkqzo`)
-
-
-   
-  const [{ added, filterdMeals, currencySign, shaking ,allMeals,searchedMealsFilter}, dispatch] = useReducer(
-    reducer,
-    initalState
+  const { currency } = FetchData(
+    `https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_huwSkG0Y1ktCuzTwvR6PdEfL0nJWd68LdSYIkqzo`
   );
 
-  
+  const [
+    {
+      filterdMeals,
+      currencySign,
+      shaking,
+      allMeals,
+      searchedMealsFilter,
+      added,
+      valueMeal,
+    },
+    dispatch,
+  ] = useReducer(reducer, initalState);
 
-  function getInfoCart(name, price, index) {
-    dispatch({ type: "getInfo", payload: { name, price, index } });
+  function getInfoCart(name, price, id) {
+    dispatch({ type: "getInfo", payload: { name, price, id } });
     setTimeout(() => {
       dispatch({ type: "cancelAnim" });
     }, 1000);
   }
+
   function hideModal() {
     dispatch({ type: "hideBackdrop" });
   }
@@ -170,15 +202,16 @@ function FoodProvider({ children }) {
     dispatch({ type: "search", payload: keyword });
   }
 
-  function getCurrency(index){
-    dispatch({type:"getCurrency",payload:index})
+  function getCurrency(index) {
+    dispatch({ type: "getCurrency", payload: index });
   }
+
   useEffect(() => {
     dispatch({ type: "inc" });
     dispatch({ type: "dec" });
-    dispatch({type:'get',payload:meals})
-    dispatch({type:'fetchCurrency',payload:currency})
-  }, [meals,currency]);
+    dispatch({ type: "get", payload: meals });
+    dispatch({ type: "fetchCurrency", payload: currency });
+  }, [meals, currency]);
 
   return (
     <FoodContext.Provider
@@ -189,7 +222,7 @@ function FoodProvider({ children }) {
         error,
         isLoading,
         getInfoCart,
-        added,
+
         hideModal,
         filterdMeals,
         increaseItems,
@@ -198,7 +231,9 @@ function FoodProvider({ children }) {
         searchMeals,
         searchedMealsFilter,
         currency,
-        getCurrency
+        getCurrency,
+        added,
+        valueMeal,
       }}
     >
       {children}

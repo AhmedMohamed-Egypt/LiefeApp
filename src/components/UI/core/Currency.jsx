@@ -27,7 +27,7 @@ function Currency() {
     val === "" || val === defaultValue[0].index ? 'Change to your Currency' : "Reset the Currency"
 
   return (
-    <div className="currencyChange position-absolute d-flex flex-column align-items-end">
+    <div className="currencyChange position-absolute d-flex  align-items-end">
       <button className="rstBtn" onClick={() => setShow((show) => !show)}>
         <i className={`bi bi-gear size-25 ${show && "orange"}`}></i>
       </button>

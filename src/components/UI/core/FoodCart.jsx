@@ -5,13 +5,13 @@ import Button from '../Button'
 import Modal from '../Modal'
 
 function FoodCart() {
-  const {filterdMeals,currencySign,shaking,increaseItems,decrement,deleteItem} = UseFood()
+  const {filterdMeals,currencySign,shaking,increaseItems,decrement,deleteItem,valueMeal} = UseFood()
   const [show,setShow] = useState(false)
   
   
   const noOfItems = filterdMeals.map((item)=>item.noOfItems).reduce((acc,cur)=>acc+cur,0)
 
-  const totalPrice = filterdMeals.map((item)=>{return {num:+item.noOfItems,price:+item.mealPrice}}).reduce((acc,cur)=>acc+(cur.num*cur.price),0).toFixed(2)
+  const totalPrice = filterdMeals.map((item)=>{return {num:+item.noOfItems,price:(+item.price*valueMeal)}}).reduce((acc,cur)=>acc+(cur.num*cur.price),0).toFixed(2)
 
   const items = filterdMeals.length > 0
   
@@ -33,11 +33,11 @@ function FoodCart() {
        {filterdMeals.map((item,index)=>{
       return(  
        <div key={index} className='d-flex   mb-8 justify-content-between' >
-      <div className='w-75 border-bottom d-flex align-items-center'>
+      <div className='w-90 border-bottom d-flex align-items-center'>
       <p className='mb-0 mr-10'>{index+1}-</p>
-        <p className='mb-0  fst-italic weight-500 w-150' >{item.mealName}</p>
+        <p className='mb-0  fst-italic weight-500 w-150' >{item.name}</p>
         <p className='mb-0 ml-15 noOfItems size-15' >{item.noOfItems}</p>
-       <p className='ml-auto mb-0  weight-bold size-18'><span className='d-inline-block width20Px text-end mr-15 '>{currencySign}</span> <span className='text-ceter d-inline-block width50Px'>{item.mealPrice}</span></p>     
+       <p className='ml-12 mb-0  weight-bold size-14'><span className='d-inline-block width20Px text-end mr-10 '>{currencySign}</span> <span className='text-ceter d-inline-block width50Px'>{(item.price * valueMeal).toFixed(2)}</span></p>     
       </div>
       <div className='d-flex align-items-center'>
         <button className='rstBtn inc' onClick={(e)=>{increaseItems(index);e.preventDefault()}}><i className="bi bi-plus"></i></button>

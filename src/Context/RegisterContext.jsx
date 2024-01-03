@@ -134,7 +134,7 @@ function RegisterProvider({ children }) {
 
     async function postUsers(userCredntials) {
       try{
-        const res = await fetch(`http://localhost:8000/userseee`, {
+        const res = await fetch(`http://localhost:8000/users`, {
           method: "POST",
           body: JSON.stringify(userCredntials),
           headers: {
