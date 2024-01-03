@@ -46,7 +46,7 @@
     {
       "id": "m5",
       "name": "Veggie Burger",
-      "price": "9.99",
+      "price": "2.99",
       "description": "A juicy veggie patty served on a whole grain bun with lettuce, tomato, and a tangy sauce.",
       "image": "../images/veggie-burger.jpg"
     },
@@ -95,21 +95,21 @@
     {
       "id": "m12",
       "name": "Pancake Stack",
-      "price": "8.99",
+      "price": "33.99",
       "description": "Fluffy pancakes stacked high, drizzled with maple syrup and topped with fresh berries.",
       "image": "../images/pancake-stack.jpg"
     },
     {
       "id": "m13",
       "name": "Miso Ramen",
-      "price": "12.99",
+      "price": "42.99",
       "description": "A warming bowl of ramen with miso broth, tender pork, soft-boiled egg, and green onions.",
       "image": "../images/miso-ramen.jpg"
     },
     {
       "id": "m14",
       "name": "Beef Tacos",
-      "price": "9.99",
+      "price": "22.99",
       "description": "Three soft tortillas filled with seasoned beef, fresh salsa, cheese, and sour cream.",
       "image": "../images/beef-tacos.jpg"
     },
@@ -130,14 +130,14 @@
     {
       "id": "m17",
       "name": "Mushroom Risotto",
-      "price": "13.99",
+      "price": "36.99",
       "description": "Creamy Arborio rice cooked with a medley of wild mushrooms and finished with parmesan.",
       "image": "../images/mushroom-risotto.jpg"
     },
     {
       "id": "m18",
       "name": "Eggplant Parmesan",
-      "price": "11.99",
+      "price": "17.99",
       "description": "Layers of breaded eggplant, marinara sauce, and melted mozzarella and parmesan cheeses.",
       "image": "../images/eggplant-parmesan.jpg"
     },
@@ -151,7 +151,7 @@
     {
       "id": "m20",
       "name": "Falafel Wrap",
-      "price": "8.99",
+      "price": "26.99",
       "description": "Crispy falafels wrapped in a warm pita with lettuce, tomatoes, and a tahini sauce.",
       "image": "../images/falafel-wrap.jpg"
     }

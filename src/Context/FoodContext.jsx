@@ -26,7 +26,7 @@ function reducer(snState, action) {
         searchedMealsFilter: action.payload,
       };
     }
-    case "getInfo": {
+    case "addToCart": {
       const updateSelectedItems = snState.allMeals.reduce(
         (acc, cur) => {
           if (cur.name === action.payload.name) {
@@ -96,7 +96,7 @@ function reducer(snState, action) {
       return {
         ...snState,
         filterdMeals: removedMeals,
-        selectedMeals: removedMeals,
+        
       };
     }
 
@@ -128,7 +128,9 @@ function reducer(snState, action) {
       const currencyValue = curData[index].val;
       const currencySign = curData[index].cur;
 
-      const updateSearchedMeals = snState.allMeals.reduce((acc, cur) => {
+      const updateSearchedMeals = 
+      
+       snState.allMeals.reduce((acc, cur) => {
         if (
           snState.searchedMealsFilter
             .map((item) => item.name)
@@ -143,6 +145,7 @@ function reducer(snState, action) {
         }
       }, []);
 
+      
       return {
         ...snState,
 
@@ -179,7 +182,7 @@ function FoodProvider({ children }) {
   ] = useReducer(reducer, initalState);
 
   function getInfoCart(name, price, id) {
-    dispatch({ type: "getInfo", payload: { name, price, id } });
+    dispatch({ type: "addToCart", payload: { name, price, id } });
     setTimeout(() => {
       dispatch({ type: "cancelAnim" });
     }, 1000);
