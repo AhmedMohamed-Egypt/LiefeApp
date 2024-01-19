@@ -1,5 +1,5 @@
 # React + Vite
-#video https://screenapp.io/app/#/library/65aa5d5a482ec3fb6774dc9f/default/ff6e5fff-b444-4a90-b911-5ab811673a09
+#video https://screenapp.io/app/#/shared/be0147e3-5fdf-4cda-ad54-84611f20b57b
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
