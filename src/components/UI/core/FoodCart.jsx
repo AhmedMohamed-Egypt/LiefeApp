@@ -45,7 +45,7 @@ function FoodCart() {
       <p className='mb-0 mr-10'>{index+1}-</p>
         <p className='mb-0  fst-italic weight-500 w-150' >{item.name}</p>
         <p className='mb-0 ml-15 noOfItems size-15' >{item.noOfItems}</p>
-       <p className='ml-12 mb-0  weight-bold size-14'><span className='d-inline-block width20Px text-end mr-10 '>{currencySign}</span> <span className='text-ceter d-inline-block width50Px'>{(item.price * valueMeal).toFixed(2)}</span>
+       <p className='ml-12 mb-0  weight-bold size-12'><span className='d-inline-block width20Px text-end mr-10 '>{currencySign}</span> <span className='text-ceter d-inline-block width50Px'>{(item.price * valueMeal).toFixed(2)}</span>
        <span>{totalEachMeal[index].totalPrice.toFixed(2)}</span>
        </p>     
       </div>
