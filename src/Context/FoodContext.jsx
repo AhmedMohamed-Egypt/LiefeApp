@@ -195,6 +195,7 @@ function FoodProvider({ children }) {
   }
   function increaseItems(index) {
     dispatch({ type: "inc", payload: index });
+    console.log(55)
   }
   function decrement(index) {
     dispatch({ type: "dec", payload: index });
@@ -212,8 +213,8 @@ function FoodProvider({ children }) {
   }
 
   useEffect(() => {
-   // dispatch({ type: "inc" });
-  //  dispatch({ type: "dec" });
+    dispatch({ type: "inc" });
+    dispatch({ type: "dec" });
     dispatch({ type: "get", payload: meals });
     dispatch({ type: "fetchCurrency", payload: currency });
   }, [meals, currency]);
