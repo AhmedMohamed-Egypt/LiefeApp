@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 function FetchData(link) {
-  const [currency,setCurrency] = useState([])
+ // const [currency,setCurrency] = useState([])
   const [meals, setMeals] = useState([]);
   
   const [error, setError] = useState("");
@@ -10,11 +10,17 @@ function FetchData(link) {
     async function getData() {
       try {
         setIsloading(true)
-        const res = await fetch(`${link}`);
+        const res = await fetch(`${link}`,{
+          method:"GET",
+          headers:{
+            "X-MASTER-KEY":"$2a$10$eb5fMMQQKy3XfIbmNVHyme7iRC0x6iF6vv7XxuLVMJKiEQaMJ4qBi",
+
+          }
+        });
         const data = await res.json();
         if (res.ok) {
-          setMeals(data);
-          setCurrency(data)
+          setMeals(data.record.meals);
+        //  setCurrency(data)
         } else {
           throw new Error("Error Conection");
         }
@@ -26,6 +32,6 @@ function FetchData(link) {
     getData();
   }, []);
 
-  return { meals,currency , error,isLoading };
+  return { meals , error,isLoading };
 }
 export { FetchData };

@@ -12,7 +12,7 @@ function Login() {
     loginInfo.password.length !== 0 &&
     login === false;
   const navigate = useNavigate()
-  if(login) {
+  if(!login) {
     setTimeout(()=>{
       navigate('/app')
     },2500)
