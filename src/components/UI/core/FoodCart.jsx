@@ -54,12 +54,7 @@ function FoodCart() {
         <button className='rstBtn dec' onClick={(e)=>{e.preventDefault();decrement(index)}}><i className="bi bi-dash"></i></button>
         <button className='rstBtn remove' onClick={()=>{deleteItem(index)}}><i className="bi bi-x"></i></button>
       </div>
-     
       </div>
-     
-      
-      
-      
       )
         })}
        <h3 className='mt-35 size-18 weight-700 fst-italic'>Total Price {currencySign }<span className='d-inline-block pl-15'>{ totalPrice}</span></h3>

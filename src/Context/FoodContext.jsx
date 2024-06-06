@@ -212,8 +212,8 @@ function FoodProvider({ children }) {
   }
 
   useEffect(() => {
-    dispatch({ type: "inc" });
-    dispatch({ type: "dec" });
+   // dispatch({ type: "inc" });
+  //  dispatch({ type: "dec" });
     dispatch({ type: "get", payload: meals });
     dispatch({ type: "fetchCurrency", payload: currency });
   }, [meals, currency]);
