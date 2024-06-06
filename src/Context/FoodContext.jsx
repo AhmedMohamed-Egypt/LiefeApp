@@ -75,9 +75,10 @@ function reducer(snState, action) {
     case "dec": {
       const decItems = snState.filterdMeals.map((item, index) => {
         if (index === action.payload) {
+          const decItems = item.noOfItems-1
           return {
             ...item,
-            noOfItems: item.noOfItems === 1 ? item.noOfItems : item.noOfItems--,
+            noOfItems: item.noOfItems === 1 ? item.noOfItems : decItems,
           };
         } else {
           return { ...item, noOfItems: item.noOfItems };
