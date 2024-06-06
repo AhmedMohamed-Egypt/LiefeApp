@@ -165,6 +165,7 @@ function reducer(snState, action) {
 
 function FoodProvider({ children }) {
   const { meals, error, isLoading } = FetchData(`https://api.jsonbin.io/v3/b/666045b6e41b4d34e4fecfe4`);
+  
   const { currency } = FetchCurrency(
     `https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_huwSkG0Y1ktCuzTwvR6PdEfL0nJWd68LdSYIkqzo`
   );
