@@ -63,7 +63,8 @@ function reducer(snState, action) {
     case "inc": {
       const incItems = snState.filterdMeals.map((item, index) => {
         if (index === action.payload) {
-          return { ...item, noOfItems: item.noOfItems++ };
+          const geIncrement = item.noOfItems+1
+          return { ...item, noOfItems:geIncrement };
         } else {
           return { ...item, noOfItems: item.noOfItems };
         }
